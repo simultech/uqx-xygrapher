@@ -1,0 +1,71 @@
+
+<!doctype html>
+{% load staticfiles %}
+<html ng-app='app'>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>Grapher</title>
+
+	<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.2/d3.min.js"></script>-->
+	<script src="{% static 'xygrapher/js/lib/jquery.min.js' %}"></script>
+    <script src="{% static 'xygrapher/js/lib/angular.min.js' %}"></script>
+    <script src="{% static 'xygrapher/js/lib/angular-cookies.min.js' %}"></script>
+    <script src="{% static 'xygrapher/js/lib/d3.min.js' %}"></script>
+
+    <script src="{% static 'xygrapher/js/angular/common/services/dataService.js' %}"></script>
+
+
+    <script src="{% static 'xygrapher/js/angular/app/app.js' %}"></script>
+    <script src="{% static 'xygrapher/js/angular/app/grapher/grapher.js' %}"></script>
+
+    <script src="{% static 'xygrapher/js/angular/common/directives/plotgraph.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'xygrapher/css/style.css' %}" />
+</head>
+<body>
+	<div id='content'>
+		<div ng-controller='GrapherCtrl'
+             ng-init="
+                 student_id='{{student_id}}';
+                 x_axis_label='{{x_axis_label}}';
+                 y_axis_label='{{y_axis_label}}';
+                 y_axis_label='{{y_axis_label}}';
+                 min_x_value='{{min_x_value}}';
+                 min_y_value='{{min_y_value}}';
+                 max_x_value='{{max_x_value}}';
+                 max_y_value='{{max_y_value}}';
+                 showlines='{{showlines}}';
+            ">
+			<div ng-switch on="state">
+				<div ng-switch-default>
+					<!-- Loading animation -->
+					<div id='loading'>Loading</div>
+				</div>
+				<div ng-switch-when="entered">
+					<!-- Show the graph -->
+					<button id='edit_button' ng-click="editGrade()">Edit My Grade</button>
+					<plotgraph></plotgraph>
+				</div>
+				<div ng-switch-when="not_entered">
+					<!-- Show the form -->
+					<div class='inputvalue'>
+						<div class="inputrow">
+							<label for="x_value">X Value:<em>({{x_axis_label}})</em></label>
+							<input type="number" name="x_value" id="x_value" value="{[{x_value_val||''}]}" />
+						</div>
+						<div class="inputrow">
+							<label for="y_value">Y Value:<em>({{x_axis_label}})</em></label>
+							<input type="number" name="y_value" id="y_value" value={[{y_value_val||''}]} />
+						</div>
+						<button ng-click="submitGrade()">Save My Value</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
