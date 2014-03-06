@@ -19,8 +19,8 @@ grapher.controller('GrapherCtrl',['$scope','modelLoader',function($scope, modelL
     $scope.y_axis_label = "fghj";
     $scope.min_x_value = null;
     $scope.min_y_value = null;
-    $scope.min_y_value = null;
-    $scope.min_y_value = null;
+    $scope.max_x_value = null;
+    $scope.max_y_value = null;
     $scope.showlines = false;
 	
 	//URLs
