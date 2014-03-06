@@ -63,18 +63,21 @@ def index(request):
 
 def data(request):
     """
-
+    Gets the data list of other points
     :param request:
     :return:
     """
-    lti = Lti(request, True)
-    student_id = lti.get_userid()
     response_data = {}
-    mycoord = Plotpoint.objects(uid=student_id).first()
-    if mycoord:
-        response_data['entered'] = 'true'
-        response_data['current_x'] = mycoord.x
-        response_data['current_y'] = mycoord.y
+    lti = Lti(request, False)
+    if lti.is_valid():
+        student_id = lti.get_userid()
+        mycoord = Plotpoint.objects(uid=student_id).first()
+        if mycoord:
+            response_data['entered'] = 'true'
+            response_data['current_x'] = mycoord.x
+            response_data['current_y'] = mycoord.y
+        else:
+            response_data['entered'] = 'false'
     else:
         response_data['entered'] = 'false'
 
