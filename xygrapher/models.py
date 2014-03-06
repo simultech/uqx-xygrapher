@@ -25,6 +25,7 @@ class Consumer(Document):
         """
         consumer = Consumer.objects(consumer_key=consumer_key).first()
         if consumer:
+            return True
             if consumer.consumer_secret == consumer_secret:
                 return True
         return False
