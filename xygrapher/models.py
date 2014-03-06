@@ -2,9 +2,11 @@
 XYGrapher Models
 """
 from django.conf import settings
+from django.core import cache
 
 from mongoengine import *
 import datetime
+from django.core.cache import get_cache
 
 connect(settings.XYGRAPHER_MONGO_COLLECTION)
 
@@ -56,13 +58,18 @@ class Plotpoint(Document):
     @staticmethod
     def getall():
         """
-        Gives back all existing plotpoints
+        Gives back all existing plotpoints, caches the plotpoints
         :return: a list of all plotpoints
         """
-        response_data = []
-        existingcoords = Plotpoint.objects()
-        for existingcoord in existingcoords:
-            response_data.append({"x": existingcoord.x, "y": existingcoord.y})
+        get_cache('default')
+        if cache.get('plotpoint_cache'):
+            return cache.get('plotpoint_cache')
+        else:
+            response_data = []
+            existingcoords = Plotpoint.objects()
+            for existingcoord in existingcoords:
+                response_data.append({"x": existingcoord.x, "y": existingcoord.y})
+            cache.set('plotpoint_cache', response_data, 60)
         return response_data
 
     @staticmethod
