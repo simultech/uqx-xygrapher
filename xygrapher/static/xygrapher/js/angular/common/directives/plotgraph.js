@@ -79,7 +79,7 @@ app.directive("plotgraph",function($window) {
         if(scope.min_y_value) { theminy = scope.min_y_value }
         if(scope.max_x_value) { themaxx = scope.max_x_value }
         if(scope.max_y_value) { themaxy = scope.max_y_value }
-        themaxy += themaxy/10;
+        //themaxy += themaxy/10;
 		xScale.domain([theminx, themaxx]);
 		yScale.domain([theminy, themaxy]);
 
