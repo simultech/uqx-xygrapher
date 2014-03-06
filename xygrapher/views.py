@@ -56,8 +56,8 @@ def index(request):
         contextvars['showlines'] = settings.XYGRAPHER_SHOWLINES
     except Exception:
         pass
-    if request.POST:
-       contextvars['post'] = request.POST
+    if lti.is_valid():
+       contextvars['post'] = lti.get_userid()
     print contextvars
     context = RequestContext(request, contextvars)
     return HttpResponse(template.render(context))
