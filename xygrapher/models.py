@@ -8,6 +8,26 @@ import datetime
 
 connect(settings.XYGRAPHER_MONGO_COLLECTION)
 
+class Consumer(Document):
+    """
+    Model for OAuth keys
+    """
+    consumer_key = StringField(required=True)
+    consumer_secret = StringField(required=True)
+
+    @staticmethod
+    def validconsumer(consumer_key, consumer_secret):
+        """
+        Checks whether a consumer is valid
+        :param consumer_key: the consumer key
+        :param consumer_secret: the consumer secret
+        :return:true or false
+        """
+        consumer = Plotpoint.objects(consumer_key=consumer_key).first()
+        if consumer:
+            if consumer.consumer_secret == consumer_secret:
+                return True
+        return False
 
 class Plotpoint(Document):
     """

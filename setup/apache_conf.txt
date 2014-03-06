@@ -1,0 +1,10 @@
+##
+## XYGrapher
+##
+
+# Set python paths (for VirtualEnv)
+WSGIPythonPath /var/www/django/xygrapher:/var/www/django/xygrapher/env/lib/python2.6/site-packages
+# Set script path
+WSGIScriptAlias /grapher /var/www/django/xygrapher/src/uqx-xygrapher/wsgi.py
+# Set static path
+Alias /xygrapher_static /var/www/django/xygrapher/src/uqx-xygrapher/xygrapher/static/
