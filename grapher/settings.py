@@ -66,6 +66,7 @@ MIDDLEWARE_CLASSES = (
 #    }
 #}
 
+SESSION_COOKIE_DOMAIN = 'uqmarkup.ceit.uq.edu.au'
 SESSION_ENGINE = 'django.contrib.sessions.backends.file'
 
 ROOT_URLCONF = 'grapher.urls'
