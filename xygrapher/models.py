@@ -64,15 +64,12 @@ class Plotpoint(Document):
         response_data = []
         if cache.get('plotpoint_cache'):
             response_data = cache.get('plotpoint_cache')
-            response_data.append({"x": 0, "y": 0, "cache": "true"})
-            return response_data
         else:
             existingcoords = Plotpoint.objects()
             for existingcoord in existingcoords:
                 response_data.append({"x": existingcoord.x, "y": existingcoord.y})
             #Set the cache
             cache.set('plotpoint_cache', response_data, 30)
-            response_data = []
         return response_data
 
     @staticmethod
