@@ -57,6 +57,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'p3p.middleware.P3PMiddleware',
 )
 
 # CACHES = {
@@ -106,6 +107,3 @@ STATIC_URL = '/static/'
 # Templates
 
 TEMPLATES_DIRS = [os.path.join(BASE_DIR,'templates')]
-
-P3P_COMPACT = 'policyref="http://www.example.com/p3p.xml", CP="NON DSP COR CURa TIA"'
-MIDDLEWARE_CLASSES += ('xygrapher.middleware.P3PHeaderMiddleware',)
