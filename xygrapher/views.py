@@ -89,6 +89,7 @@ def data(request):
     return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 
+@csrf_exempt
 @require_http_methods(["POST"])
 def savecoord(request):
     """
