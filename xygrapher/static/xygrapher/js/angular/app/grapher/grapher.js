@@ -24,8 +24,8 @@ grapher.controller('GrapherCtrl',['$scope','modelLoader',function($scope, modelL
     $scope.showlines = false;
 	
 	//URLs
-	$scope.getdataURL = '/xygrapher/data/';
-	$scope.submitURL = '/xygrapher/savecoord/';
+	$scope.getdataURL = '/grapher/xygrapher/data/';
+	$scope.submitURL = '/grapher/xygrapher/savecoord/';
 	
 	//Start the app
 	$scope.$watch('student_id',function(newVal,oldVal) {
