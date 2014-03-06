@@ -48,6 +48,7 @@ XYGRAPHER_MIN_Y_VALUE = 0
 XYGRAPHER_MAX_X_VALUE = 100
 XYGRAPHER_MAX_Y_VALUE = 100
 XYGRAPHER_SHOWLINES = 'true'
+XYGRAPHER_MONGO_COLLECTION = 'xygrapher'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

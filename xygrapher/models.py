@@ -1,11 +1,12 @@
 """
 XYGrapher Models
 """
+from django.conf import settings
 
 from mongoengine import *
 import datetime
 
-connect('project1')
+connect(settings.XYGRAPHER_MONGO_COLLECTION)
 
 
 class Plotpoint(Document):
