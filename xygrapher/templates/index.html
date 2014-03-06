@@ -53,6 +53,7 @@
 				<div ng-switch-when="not_entered">
 					<!-- Show the form -->
 					<div class='inputvalue'>
+                        {{post}}
 						<div class="inputrow">
 							<label for="x_value">X Value:<em>({{x_axis_label}})</em></label>
 							<input type="number" name="x_value" id="x_value" value="{[{x_value_val||''}]}" />
