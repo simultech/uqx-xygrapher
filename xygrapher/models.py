@@ -59,7 +59,7 @@ class Plotpoint(Document):
         Gives back all existing plotpoints
         :return: a list of all plotpoints
         """
-        response_data = []
+        response_data = {}
         existingcoords = Plotpoint.objects()
         for existingcoord in existingcoords:
             response_data['data'].append({"x": existingcoord.x, "y": existingcoord.y})
