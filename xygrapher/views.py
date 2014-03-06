@@ -94,8 +94,8 @@ def savecoord(request):
     :param request:
     :return:
     """
-    Lti(request, True)
-    user_id = request.POST.get('uid')
+    lti = Lti(request, True)
+    student_id = lti.get_userid()
     x_pos = float(request.POST.get('x', 0.0))
     y_pos = float(request.POST.get('y', 0.0))
     Plotpoint.saveorupdate(dict(uid=user_id, x=x_pos, y=y_pos))
