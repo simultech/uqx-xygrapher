@@ -67,7 +67,7 @@ class Plotpoint(Document):
             response_data = []
             existingcoords = Plotpoint.objects()
             for existingcoord in existingcoords:
-                response_data.append({"x": existingcoord.x, "y": existingcoord.y})
+                response_data.append({"x": existingcoord.x, "y": existingcoord.y, "cache": "true"})
             cache.set('plotpoint_cache', response_data, 30)
         return response_data
 
