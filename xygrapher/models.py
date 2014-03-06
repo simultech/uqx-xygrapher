@@ -6,7 +6,7 @@ from django.core import cache
 
 from mongoengine import *
 import datetime
-from django.core.cache import get_cache
+from django.core.cache import cache
 
 connect(settings.XYGRAPHER_MONGO_COLLECTION)
 
@@ -61,7 +61,6 @@ class Plotpoint(Document):
         Gives back all existing plotpoints, caches the plotpoints
         :return: a list of all plotpoints
         """
-        get_cache('default')
         if cache.get('plotpoint_cache'):
             return cache.get('plotpoint_cache')
         else:
@@ -69,7 +68,7 @@ class Plotpoint(Document):
             existingcoords = Plotpoint.objects()
             for existingcoord in existingcoords:
                 response_data.append({"x": existingcoord.x, "y": existingcoord.y})
-            cache.set('plotpoint_cache', response_data, 60)
+            cache.set('plotpoint_cache', response_data, 30)
         return response_data
 
     @staticmethod
