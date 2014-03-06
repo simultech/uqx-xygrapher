@@ -82,6 +82,7 @@ def data(request):
             response_data['entered'] = 'false'
     else:
         response_data['entered'] = 'false'
+        response_data['data'] = []
     return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 
