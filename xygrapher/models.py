@@ -54,6 +54,18 @@ class Plotpoint(Document):
     modified_date = DateTimeField(default=datetime.datetime.now)
 
     @staticmethod
+    def getall():
+        """
+        Gives back all existing plotpoints
+        :return: a list of all plotpoints
+        """
+        response_data = []
+        existingcoords = Plotpoint.objects()
+        for existingcoord in existingcoords:
+            response_data['data'].append({"x": existingcoord.x, "y": existingcoord.y})
+        return response_data
+
+    @staticmethod
     def saveorupdate(obj):
         """
         Either creates a new entry in the Plotpoint collection or updates the existing one based on the uid

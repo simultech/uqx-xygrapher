@@ -78,10 +78,7 @@ def data(request):
     else:
         response_data['entered'] = 'false'
 
-    response_data['data'] = []
-    existingcoords = Plotpoint.objects()
-    for existingcoord in existingcoords:
-        response_data['data'].append({"x": existingcoord.x, "y": existingcoord.y})
+    response_data['data'] = Plotpoint.getall()
     if mycoord:
         response_data['data'].append({"x": mycoord.x, "y": mycoord.y, "user": "true"})
     return HttpResponse(json.dumps(response_data), content_type="application/json")
@@ -90,9 +87,9 @@ def data(request):
 @require_http_methods(["POST"])
 def savecoord(request):
     """
-
+    Saves the new users coordinate into the mongo collection
     :param request:
-    :return:
+    :return:whether it was saved
     """
     lti = Lti(request, True)
     student_id = lti.get_userid()
