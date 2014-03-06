@@ -10,7 +10,8 @@ sys.path.append('/var/www/django/xygrapher/src/uqx-xygrapher')
 sys.path.append('/var/www/django/xygrapher/src/uqx-xygrapher/xygrapher')
 
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "grapher.settings")
+#os.environ.setdefault("DJANGO_SETTINGS_MODULE", "grapher.settings")
+os.environ["DJANGO_SETTINGS_MODULE"] = "grapher.settings"
 
 import django.core.handlers.wsgi
 application = django.core.handlers.wsgi.WSGIHandler()
