@@ -61,13 +61,16 @@ class Plotpoint(Document):
         Gives back all existing plotpoints, caches the plotpoints
         :return: a list of all plotpoints
         """
+        response_data = []
         if cache.get('plotpoint_cache'):
-            return cache.get('plotpoint_cache')
+            response_data = cache.get('plotpoint_cache')
+            response_data.append({"x": 0, "y": 0, "cache": "true"})
+            return response_data
         else:
-            response_data = []
             existingcoords = Plotpoint.objects()
             for existingcoord in existingcoords:
-                response_data.append({"x": existingcoord.x, "y": existingcoord.y, "cache": "true"})
+                response_data.append({"x": existingcoord.x, "y": existingcoord.y})
+            #Set the cache
             cache.set('plotpoint_cache', response_data, 30)
         return response_data
 
