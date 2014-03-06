@@ -98,13 +98,13 @@ def savecoord(request):
     student_id = lti.get_userid()
     x_pos = float(request.POST.get('x', 0.0))
     y_pos = float(request.POST.get('y', 0.0))
-    Plotpoint.saveorupdate(dict(uid=user_id, x=x_pos, y=y_pos))
+    Plotpoint.saveorupdate(dict(uid=student_id, x=x_pos, y=y_pos))
     response_data = {'saved': 'true'}
     return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 
-# # noinspection PyUnusedLocal
-# def generate(request):
+# noinspection PyUnusedLocal
+def generate(request):
 #     """
 #
 #     :param request:
@@ -134,5 +134,5 @@ def savecoord(request):
 #             y_val = random.randint(0, 1000)
 #         item = dict(uid=user_id, x=x, y=y_val)
 #         Plotpoint.saveorupdate(item)
-#     response_data = {'generated': 'truez'}
-#     return HttpResponse(json.dumps(response_data), content_type="application/json")
+     response_data = {'generated': 'truez'}
+     return HttpResponse(json.dumps(response_data), content_type="application/json")
