@@ -72,6 +72,7 @@ class Plotpoint(Document):
                 response_data.append({"x": existingcoord.x, "y": existingcoord.y})
             #Set the cache
             cache.set('plotpoint_cache', response_data, 30)
+            response_data = []
         return response_data
 
     @staticmethod
