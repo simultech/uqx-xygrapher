@@ -1,16 +1,9 @@
 import os
 import sys
 
-APP_BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
-# Add the app's directory to the PYTHONPATH
+APP_BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(APP_BASE_DIR)
-sys.path.append(os.path.join(APP_BASE_DIR, 'grapher'))
-sys.path.append('/var/www/django/xygrapher/src/uqx-xygrapher')
-sys.path.append('/var/www/django/xygrapher/src/uqx-xygrapher/xygrapher')
 
-
-#os.environ.setdefault("DJANGO_SETTINGS_MODULE", "grapher.settings")
 os.environ["DJANGO_SETTINGS_MODULE"] = "grapher.settings"
 
 import django.core.handlers.wsgi
