@@ -12,6 +12,7 @@ import json
 from models import *
 from lti import *
 from django.conf import settings
+from django.views.decorators.cache import never_cache
 
 
 @xframe_options_exempt
@@ -62,7 +63,7 @@ def index(request):
     context = RequestContext(request, contextvars)
     return HttpResponse(template.render(context))
 
-
+@never_cache
 def data(request):
     """
     Gets the data list of other points
