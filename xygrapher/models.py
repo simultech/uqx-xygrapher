@@ -29,6 +29,18 @@ class Consumer(Document):
                 return True
         return False
 
+    @staticmethod
+    def getsecretforkey(consumer_key):
+        """
+        Gets the consumer secret for the specified key
+        :param consumer_key: the consumer key
+        :return:the consumer secret
+        """
+        consumer = Plotpoint.objects(consumer_key=consumer_key).first()
+        if consumer:
+            return consumer.consumer_secret
+        return ""
+
 class Plotpoint(Document):
     """
     Model for saving MongoDB Plotpoints

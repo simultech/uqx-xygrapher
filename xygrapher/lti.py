@@ -6,6 +6,7 @@ from collections import OrderedDict
 import urllib
 from django.http import Http404
 from oauthlib.oauth1.rfc5849 import signature
+from src.grapher.xygrapher.models import Consumer
 
 
 class Lti():
@@ -87,10 +88,7 @@ class Lti():
         :param consumer_key: the consumer key
         :return consumer_secret
         """
-        consumer_secret = ""
-        if consumer_key == "test":
-            consumer_secret = "12345"
-        return consumer_secret
+        return Consumer.getsecretforkey(consumer_key)
 
 
 class Oauthrequest():
