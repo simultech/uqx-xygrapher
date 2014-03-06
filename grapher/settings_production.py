@@ -30,6 +30,12 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.file'
 #         'LOCATION': '127.0.0.1:11211' # can also be a list of locations
 #    }
 #}
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/var/tmp/django_cache',
+    }
+}
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 DATABASES = {
