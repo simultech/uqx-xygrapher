@@ -1,0 +1,1 @@
+db.consumer.insert({consumer_key:"test",consumer_secret:"12345"})

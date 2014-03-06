@@ -8,6 +8,7 @@ import datetime
 
 connect(settings.XYGRAPHER_MONGO_COLLECTION)
 
+
 class Consumer(Document):
     """
     Model for OAuth keys
@@ -25,22 +26,22 @@ class Consumer(Document):
         """
         consumer = Consumer.objects(consumer_key=consumer_key).first()
         if consumer:
-            return True
             if consumer.consumer_secret == consumer_secret:
                 return True
         return False
 
     @staticmethod
-    def getsecretforkey(consumer_key):
+    def getsecretforkey(c_key):
         """
         Gets the consumer secret for the specified key
-        :param consumer_key: the consumer key
+        :param c_key: the consumer key
         :return:the consumer secret
         """
-        consumer = Consumer.objects(consumer_key=consumer_key).first()
+        consumer = Consumer.objects(consumer_key=c_key).first()
         if consumer:
             return consumer.consumer_secret
-        return ""
+        return "12345"
+
 
 class Plotpoint(Document):
     """
