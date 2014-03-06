@@ -71,19 +71,17 @@ def data(request):
     lti = Lti(request, False)
     if lti.is_valid():
         student_id = lti.get_userid()
+        response_data['data'] = Plotpoint.getall()
         mycoord = Plotpoint.objects(uid=student_id).first()
         if mycoord:
             response_data['entered'] = 'true'
             response_data['current_x'] = mycoord.x
             response_data['current_y'] = mycoord.y
+            response_data['data'].append({"x": mycoord.x, "y": mycoord.y, "user": "true"})
         else:
             response_data['entered'] = 'false'
     else:
         response_data['entered'] = 'false'
-
-    response_data['data'] = Plotpoint.getall()
-    if mycoord:
-        response_data['data'].append({"x": mycoord.x, "y": mycoord.y, "user": "true"})
     return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 
