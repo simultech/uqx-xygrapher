@@ -36,7 +36,7 @@ class Consumer(Document):
         :param consumer_key: the consumer key
         :return:the consumer secret
         """
-        consumer = Plotpoint.objects(consumer_key=consumer_key).first()
+        consumer = Consumer.objects(consumer_key=consumer_key).first()
         if consumer:
             return consumer.consumer_secret
         return ""
