@@ -13,8 +13,8 @@ body {
 }
 #edit_button {
     position:absolute;
-    right:0px;
-    top:0px;
+    right:10px;
+    top:10px;
 }
 #loading {
     font-size:140%;
