@@ -126,7 +126,7 @@ def generate(request):
     x_shift = -3
     x_start = 5
     x_end = 15
-    x_increment = 0.004
+    x_increment = 0.01
     x = x_start
     while x < x_end:
         x += x_increment
