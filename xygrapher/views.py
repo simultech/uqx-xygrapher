@@ -62,8 +62,7 @@ def index(request):
     print contextvars
     context = RequestContext(request, contextvars)
     response = HttpResponse(template.render(context))
-    response['P3P'] = 'CP="NON DSP COR CURa TIA"'
-    response['hello'] = 'world'
+    response['P3P'] = 'CP="We do not have a P3P policy."'
     return response
 
 @never_cache
@@ -89,7 +88,9 @@ def data(request):
     else:
         response_data['entered'] = 'false'
         response_data['data'] = []
-    return HttpResponse(json.dumps(response_data), content_type="application/json")
+    response = HttpResponse(json.dumps(response_data), content_type="application/json")
+    response['P3P'] = 'CP="We do not have a P3P policy."'
+    return response
 
 
 @csrf_exempt
@@ -106,7 +107,9 @@ def savecoord(request):
     y_pos = float(request.POST.get('y', 0.0))
     Plotpoint.saveorupdate(dict(uid=student_id, x=x_pos, y=y_pos))
     response_data = {'saved': 'true'}
-    return HttpResponse(json.dumps(response_data), content_type="application/json")
+    response = HttpResponse(json.dumps(response_data), content_type="application/json")
+    response['P3P'] = 'CP="We do not have a P3P policy."'
+    return response
 
 
 # noinspection PyUnusedLocal
