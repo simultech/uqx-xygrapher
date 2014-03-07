@@ -116,34 +116,34 @@ def savecoord(request):
 
 # noinspection PyUnusedLocal
 def generate(request):
-#     """
-#
-#     :param request:
-#     :return:
-#     """
-#     use_curve = True
-#     percentage_incorrect = 10
-#     x_shift = -3
-#     x_start = 5
-#     x_end = 15
-#     x_increment = 0.004
-#     x = x_start
-#     while x < x_end:
-#         x += x_increment
-#         user_id = 's40000_'+str(x)
-#         if use_curve:
-#             zx = x+x_shift
-#             a = 0.1
-#             b = -1
-#             c = -0.1
-#             d = 25
-#             offset = 0
-#             if random.randint(0, 100) < percentage_incorrect:
-#                 offset = random.randint(0, 20)-10
-#             y_val = a*(zx*zx*zx) + b*(zx*zx) + c*zx + d + offset
-#         else:
-#             y_val = random.randint(0, 1000)
-#         item = dict(uid=user_id, x=x, y=y_val)
-#         Plotpoint.saveorupdate(item)
+    """
+
+    :param request:
+    :return:
+    """
+    use_curve = True
+    percentage_incorrect = 10
+    x_shift = -3
+    x_start = 5
+    x_end = 15
+    x_increment = 0.004
+    x = x_start
+    while x < x_end:
+        x += x_increment
+        user_id = 's40000_'+str(x)
+        if use_curve:
+            zx = x+x_shift
+            a = 0.1
+            b = -1
+            c = -0.1
+            d = 25
+            offset = 0
+            if random.randint(0, 100) < percentage_incorrect:
+                offset = random.randint(0, 20)-10
+            y_val = a*(zx*zx*zx) + b*(zx*zx) + c*zx + d + offset
+        else:
+            y_val = random.randint(0, 1000)
+        item = dict(uid=user_id, x=x, y=y_val)
+        Plotpoint.saveorupdate(item)
      response_data = {'generated': 'truez'}
      return HttpResponse(json.dumps(response_data), content_type="application/json")
