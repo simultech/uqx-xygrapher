@@ -57,7 +57,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'p3p.middleware.P3PMiddleware',
+    'xygrapher.middleware.P3PHeaderMiddleware',
 )
 
 # CACHES = {

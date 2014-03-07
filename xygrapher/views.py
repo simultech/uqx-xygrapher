@@ -61,7 +61,10 @@ def index(request):
        contextvars['post'] = lti.get_userid()
     print contextvars
     context = RequestContext(request, contextvars)
-    return HttpResponse(template.render(context))
+    response = HttpResponse(template.render(context))
+    response['P3P'] = 'CP="NON DSP COR CURa TIA"'
+    response['hello'] = 'world'
+    return response
 
 @never_cache
 def data(request):
