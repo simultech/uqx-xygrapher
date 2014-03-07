@@ -145,5 +145,5 @@ def generate(request):
             y_val = random.randint(0, 1000)
         item = dict(uid=user_id, x=x, y=y_val)
         Plotpoint.saveorupdate(item)
-     response_data = {'generated': 'truez'}
-     return HttpResponse(json.dumps(response_data), content_type="application/json")
+    response_data = {'generated': 'truez'}
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
