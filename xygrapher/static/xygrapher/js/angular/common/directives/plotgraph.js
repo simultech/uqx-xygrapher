@@ -124,7 +124,7 @@ app.directive("plotgraph",function($window) {
                 graph.append("g").append('svg:line')
                     .attr("x1", -100)
                     .attr("y1", yMap(d))
-                    .attr("x2", 9999)
+                    .attr("x2", width + margin.left + margin.right)
                     .attr("y2", yMap(d))
                     .style("stroke", d3.rgb(userColor));
                 //y axis line
@@ -132,7 +132,7 @@ app.directive("plotgraph",function($window) {
                     .attr("x1", xMap(d))
                     .attr("y1", -100)
                     .attr("x2", xMap(d))
-                    .attr("y2", 9999)
+                    .attr("y2", height + margin.top + margin.bottom)
                     .style("stroke", d3.rgb(userColor));
             }
         }
