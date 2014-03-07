@@ -103,10 +103,12 @@ def savecoord(request):
     """
     lti = Lti(request, True)
     student_id = lti.get_userid()
-    x_pos = float(request.POST.get('x', 0.0))
-    y_pos = float(request.POST.get('y', 0.0))
-    Plotpoint.saveorupdate(dict(uid=student_id, x=x_pos, y=y_pos))
-    response_data = {'saved': 'true'}
+    response_data = {'saved': 'false'}
+    if student_id != "":
+        x_pos = float(request.POST.get('x', 0.0))
+        y_pos = float(request.POST.get('y', 0.0))
+        Plotpoint.saveorupdate(dict(uid=student_id, x=x_pos, y=y_pos))
+        response_data = {'saved': 'true'}
     response = HttpResponse(json.dumps(response_data), content_type="application/json")
     response['P3P'] = 'CP="We do not have a P3P policy."'
     return response
