@@ -80,8 +80,12 @@ grapher.controller('GrapherCtrl',['$scope','modelLoader',function($scope, modelL
                     if(submitted == "true") {
     					$scope.x_value_val = response.data.current_x;
 	    				$scope.y_value_val = response.data.current_y;
-                    }
-                    if($scope.multiple_attempts == 'true') {
+                        if($scope.multiple_attempts == 'true') {
+                            $scope.can_resubmit = true
+                        } else {
+                            $scope.can_resubmit = false
+                        }
+                    } else {
                         $scope.can_resubmit = true
                     }
 					//show graph
