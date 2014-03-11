@@ -6,8 +6,8 @@ Changes to the main settings.py file
 
 from settings import *
 
-DEBUG = False
-TEMPLATE_DEBUG = False
+DEBUG = True
+TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'dev.ceit.uq.edu.au', 'tools.ceit.uq.edu.au', 'uqmarkup.ceit.uq.edu.au']
 ADMINS = (
     ('Andrew Dekker', 'uqadekke@uq.edu.au'),
@@ -21,7 +21,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 SESSION_ENGINE = 'django.contrib.sessions.backends.file'
 # CACHES = {

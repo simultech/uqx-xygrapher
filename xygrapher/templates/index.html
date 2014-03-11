@@ -42,7 +42,6 @@
                  showlines='{{showlines}}';
                  multiple_attempts='{{multiple_attempts}}';
                  require_grade='{{require_grade}}';
-                 submit_button='{{submit_button}}';
             ">
 			<div ng-switch on="state">
 				<div ng-switch-default>
@@ -51,7 +50,7 @@
 				</div>
 				<div ng-switch-when="entered">
 					<!-- Show the graph -->
-					<button id='edit_button' ng-click="editGrade()">Edit My Grade</button>
+					<button id='edit_button' ng-click="editGrade()">{{submit_button}}</button>
 					<plotgraph></plotgraph>
 				</div>
 				<div ng-switch-when="not_entered">
@@ -66,7 +65,7 @@
 							<label for="y_value">Y Value:<em>({{x_axis_label}})</em></label>
 							<input type="number" name="y_value" id="y_value" value={[{y_value_val||''}]} />
 						</div>
-						<button ng-click="submitGrade()">Save My Value</button>
+						<button ng-click="submitGrade()">{{submit_button}}</button>
 					</div>
 				</div>
 			</div>

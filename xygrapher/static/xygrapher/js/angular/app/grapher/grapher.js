@@ -86,7 +86,7 @@ grapher.controller('GrapherCtrl',['$scope','modelLoader',function($scope, modelL
 				} else {
 					//show input
 					$scope.state = 'not_entered';
-                    console.log("He")
+                    console.log("Going to edit")
 				}
 			} else {
 				//show an error
