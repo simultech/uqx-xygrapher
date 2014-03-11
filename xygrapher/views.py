@@ -30,6 +30,18 @@ def index(request):
         'student_id': student_id
     }
     try:
+        contextvars['multiple_attempts'] = settings.XYGRAPHER_MULTIPLE_ATTEMPTS
+    except Exception:
+        pass
+    try:
+        contextvars['require_grade'] = settings.XYGRAPHER_REQUIRES_GRADE
+    except Exception:
+        pass
+    try:
+        contextvars['submit_button'] = settings.XYGRAPHER_SUBMIT_BUTTON
+    except Exception:
+        pass
+    try:
         contextvars['x_axis_label'] = settings.XYGRAPHER_CONFIG_XAXIS
     except Exception:
         pass

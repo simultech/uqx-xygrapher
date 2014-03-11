@@ -22,6 +22,9 @@ grapher.controller('GrapherCtrl',['$scope','modelLoader',function($scope, modelL
     $scope.max_x_value = null;
     $scope.max_y_value = null;
     $scope.showlines = false;
+    $scope.multiple_attempts = "true";
+    $scope.require_grade = "true";
+    $scope.submit_button = "edit values";
 	
 	//URLs
 	$scope.getdataURL = '/grapher/xygrapher/data/';
@@ -72,9 +75,10 @@ grapher.controller('GrapherCtrl',['$scope','modelLoader',function($scope, modelL
 		modelLoader.load($scope.getdataURL).then(function(response) {
 			if(response.status == 'success') {
 				var submitted = response.data.entered;
-				if(submitted == "true") {
-					$scope.x_value_val = response.data.current_x;
-					$scope.y_value_val = response.data.current_y;
+				if(submitted == "true" || $scope.require_grade == 'false') {
+                    if submitted == "true":
+    					$scope.x_value_val = response.data.current_x;
+	    				$scope.y_value_val = response.data.current_y;
 					//show graph
 					$scope.state = 'entered';
 					//set data
