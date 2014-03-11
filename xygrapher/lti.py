@@ -37,6 +37,8 @@ class Lti():
                 else:
                     print "GENERATING 404 - BAD OAUTH DATA"
                     raise Http404
+            else:
+                raise Http404
         elif self.is_valid() is not True and required:
             print "GENERATING 404 - NOT AN LTI CALL AND LTI IS REQUIRED"
             raise Http404
