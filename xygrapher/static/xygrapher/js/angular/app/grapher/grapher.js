@@ -76,9 +76,10 @@ grapher.controller('GrapherCtrl',['$scope','modelLoader',function($scope, modelL
 			if(response.status == 'success') {
 				var submitted = response.data.entered;
 				if(submitted == "true" || $scope.require_grade == 'false') {
-                    if submitted == "true":
+                    if(submitted == "true") {
     					$scope.x_value_val = response.data.current_x;
 	    				$scope.y_value_val = response.data.current_y;
+                    }
 					//show graph
 					$scope.state = 'entered';
 					//set data
