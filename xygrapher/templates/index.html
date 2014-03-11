@@ -50,7 +50,9 @@
 				</div>
 				<div ng-switch-when="entered">
 					<!-- Show the graph -->
-					<button id='edit_button' ng-click="editGrade()">{{submit_button}}</button>
+                    <div ng-show="can_resubmit">
+					    <button id='edit_button' ng-click="editGrade()">{{submit_button}}</button>
+                    </div>
 					<plotgraph></plotgraph>
 				</div>
 				<div ng-switch-when="not_entered">

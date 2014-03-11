@@ -25,6 +25,7 @@ grapher.controller('GrapherCtrl',['$scope','modelLoader',function($scope, modelL
     $scope.multiple_attempts = "true";
     $scope.require_grade = "true";
     $scope.submit_button = "edit values";
+    $scope.can_resubmit = false;
 	
 	//URLs
 	$scope.getdataURL = '/grapher/xygrapher/data/';
@@ -79,6 +80,9 @@ grapher.controller('GrapherCtrl',['$scope','modelLoader',function($scope, modelL
                     if(submitted == "true") {
     					$scope.x_value_val = response.data.current_x;
 	    				$scope.y_value_val = response.data.current_y;
+                    }
+                    if($scope.multiple_attempts == 'true') {
+                        $scope.can_resubmit = true
                     }
 					//show graph
 					$scope.state = 'entered';
