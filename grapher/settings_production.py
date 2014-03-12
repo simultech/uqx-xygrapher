@@ -9,7 +9,7 @@ from settings import *
 DEBUG = False
 TEMPLATE_DEBUG = False
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'dev.ceit.uq.edu.au', 'tools.ceit.uq.edu.au', 'uqmarkup.ceit.uq.edu.au']
-SESSION_COOKIE_DOMAIN = 'uqmarkup.ceit.uq.edu.au'
+SESSION_COOKIE_DOMAIN = 'tools.ceit.uq.edu.au'
 SERVER_EMAIL = 'django@ceit.uq.edu.au'
 ADMINS = (
     ('Andrew Dekker', 'uqadekke@uq.edu.au'),
