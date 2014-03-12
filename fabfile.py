@@ -34,6 +34,7 @@ def func_gitpush():
 #Helpers
 
 def local_ve(cmd):
-    result = local(env.activate+" && "+cmd, capture=True)
-    if result.failed and not confirm("Command failed. Continue anyway?"):
-        abort("Aborting at user request.")
+    with settings(warn_only=True):
+        result = local(env.activate+" && "+cmd, capture=True)
+        if result.failed and not confirm("Command failed. Continue anyway?"):
+            abort("Aborting at user request.")
