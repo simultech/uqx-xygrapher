@@ -77,16 +77,13 @@ class Lti():
             return True
         return False
 
-    @staticmethod
-    def get_oauthsecret_for_key(consumer_key):
-        """
-        Retuns a the oauth consumer secret based on the consumer key
-        :param consumer_key: the consumer key
-        :return consumer_secret
-        """
-        return Consumer.getsecretforkey(consumer_key)
-
     def setvariables(request, contextvars, vars):
+        """
+        Sets custom variables from LTI or from settings
+        :param contextvars: the context dictionary
+        :param vars: key/values of each setting
+        :return: an updated contextvars
+        """
         postdata = {}
         if request.POST:
             postdata = dict(request.POST.dict())
@@ -100,6 +97,15 @@ class Lti():
                     pass
             print var
         return contextvars
+
+    @staticmethod
+    def get_oauthsecret_for_key(consumer_key):
+        """
+        Retuns a the oauth consumer secret based on the consumer key
+        :param consumer_key: the consumer key
+        :return consumer_secret
+        """
+        return Consumer.getsecretforkey(consumer_key)
 
 
 class Oauthrequest():
