@@ -33,6 +33,7 @@ class Lti():
                     self.__httprequest.session["lti_validsession"] = True
                     self.__httprequest.session["lti_user_id"] = postdata.get("user_id")
                     self.__httprequest.session["lti_role"] = postdata.get("roles")
+                    raise Http403("ZZ BAD OAUTH DATA")
                 else:
                     raise Http403("BAD OAUTH DATA")
         elif self.is_valid() is not True and required:
