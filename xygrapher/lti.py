@@ -86,6 +86,21 @@ class Lti():
         """
         return Consumer.getsecretforkey(consumer_key)
 
+    def setvariables(request, contextvars, vars):
+        postdata = {}
+        if request.POST:
+            postdata = dict(request.POST.dict())
+        for var in vars:
+            if postdata.get("custom_"+var):
+                contextvars[var] = postdata.get("custom_"+var)
+            else:
+                try:
+                    contextvars[var] = vars[var]
+                except Exception:
+                    pass
+            print var
+        return contextvars
+
 
 class Oauthrequest():
     """

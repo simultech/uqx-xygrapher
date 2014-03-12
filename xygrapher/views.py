@@ -29,7 +29,7 @@ def index(request):
     contextvars = {
         'student_id': student_id
     }
-    contextvars = setVariables(request,contextvars,{
+    contextvars = lti.setVariables(request,contextvars,{
         'multiple_attempts': settings.XYGRAPHER_MULTIPLE_ATTEMPTS,
         'require_grade': settings.XYGRAPHER_REQUIRES_GRADE,
         'submit_button': settings.XYGRAPHER_SUBMIT_BUTTON,
@@ -96,22 +96,6 @@ def savecoord(request):
     response = HttpResponse(json.dumps(response_data), content_type="application/json")
     response['P3P'] = 'CP="We do not have a P3P policy."'
     return response
-
-def setvariables(request, contextvars, vars):
-    postdata = {}
-    if request.POST:
-        postdata = dict(request.POST.dict())
-    for var in vars:
-        if postdata.get("custom_"+var):
-            contextvars[var] = postdata.get("custom_"+var)
-        else:
-            try:
-                contextvars[var] = vars[var]
-            except Exception:
-                pass
-        print var
-    return contextvars
-
 
 
 # noinspection PyUnusedLocal
