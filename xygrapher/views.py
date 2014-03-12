@@ -29,46 +29,18 @@ def index(request):
     contextvars = {
         'student_id': student_id
     }
-    try:
-        contextvars['multiple_attempts'] = settings.XYGRAPHER_MULTIPLE_ATTEMPTS
-    except Exception:
-        pass
-    try:
-        contextvars['require_grade'] = settings.XYGRAPHER_REQUIRES_GRADE
-    except Exception:
-        pass
-    try:
-        contextvars['submit_button'] = settings.XYGRAPHER_SUBMIT_BUTTON
-    except Exception:
-        pass
-    try:
-        contextvars['x_axis_label'] = settings.XYGRAPHER_CONFIG_XAXIS
-    except Exception:
-        pass
-    try:
-        contextvars['y_axis_label'] = settings.XYGRAPHER_CONFIG_YAXIS
-    except Exception:
-        pass
-    try:
-        contextvars['min_x_value'] = settings.XYGRAPHER_MIN_X_VALUE
-    except Exception:
-        pass
-    try:
-        contextvars['min_y_value'] = settings.XYGRAPHER_MIN_Y_VALUE
-    except Exception:
-        pass
-    try:
-        contextvars['max_x_value'] = settings.XYGRAPHER_MAX_X_VALUE
-    except Exception:
-        pass
-    try:
-        contextvars['max_y_value'] = settings.XYGRAPHER_MAX_Y_VALUE
-    except Exception:
-        pass
-    try:
-        contextvars['showlines'] = settings.XYGRAPHER_SHOWLINES
-    except Exception:
-        pass
+    contextvars = setVariables(request,contextvars,{
+        'multiple_attempts': settings.XYGRAPHER_MULTIPLE_ATTEMPTS,
+        'require_grade': settings.XYGRAPHER_REQUIRES_GRADE,
+        'submit_button': settings.XYGRAPHER_SUBMIT_BUTTON,
+        'x_axis_label': settings.XYGRAPHER_CONFIG_XAXIS,
+        'y_axis_label': settings.XYGRAPHER_CONFIG_YAXIS,
+        'min_x_value': settings.XYGRAPHER_MIN_X_VALUE,
+        'min_y_value': settings.XYGRAPHER_MIN_Y_VALUE,
+        'max_x_value': settings.XYGRAPHER_MAX_X_VALUE,
+        'max_y_value': settings.XYGRAPHER_MAX_Y_VALUE,
+        'showlines': settings.XYGRAPHER_SHOWLINES,
+    })
     if lti.is_valid():
        contextvars['post'] = lti.get_userid()
     print contextvars
@@ -124,6 +96,22 @@ def savecoord(request):
     response = HttpResponse(json.dumps(response_data), content_type="application/json")
     response['P3P'] = 'CP="We do not have a P3P policy."'
     return response
+
+def setvariables(request, contextvars, vars):
+    postdata = {}
+    if request.POST:
+        postdata = dict(request.POST.dict())
+    for var in vars:
+        if postdata.get("custom_"+var):
+            contextvars[var] = postdata.get("custom_"+var)
+        else:
+            try:
+                contextvars[var] = vars[var]
+            except Exception:
+                pass
+        print var
+    return contextvars
+
 
 
 # noinspection PyUnusedLocal
