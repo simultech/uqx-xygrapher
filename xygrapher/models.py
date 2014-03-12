@@ -73,17 +73,19 @@ class Plotpoint(Document):
         return response_data
 
     @staticmethod
-    def saveorupdate(obj):
+    def saveorupdate(obj, can_update="true"):
         """
         Either creates a new entry in the Plotpoint collection or updates the existing one based on the uid
         :param obj: a dict containing x,y and uid keys
+        :param can_update: true or false whether it can update
         """
         existingcoord = Plotpoint.objects(uid=obj['uid']).first()
         if existingcoord:
-            existingcoord.x = obj['x']
-            existingcoord.y = obj['y']
-            existingcoord.modified_date = datetime.datetime.now
-            existingcoord.save()
+            if can_update == "true":
+                existingcoord.x = obj['x']
+                existingcoord.y = obj['y']
+                existingcoord.modified_date = datetime.datetime.now
+                existingcoord.save()
         else:
             newcoord = Plotpoint(obj['uid'])
             newcoord.x = obj['x']

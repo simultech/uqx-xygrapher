@@ -91,7 +91,7 @@ def savecoord(request):
     if student_id != "":
         x_pos = float(request.POST.get('x', 0.0))
         y_pos = float(request.POST.get('y', 0.0))
-        Plotpoint.saveorupdate(dict(uid=student_id, x=x_pos, y=y_pos))
+        Plotpoint.saveorupdate(dict(uid=student_id, x=x_pos, y=y_pos), settings.XYGRAPHER_MULTIPLE_ATTEMPTS)
         response_data = {'saved': 'true'}
     response = HttpResponse(json.dumps(response_data), content_type="application/json")
     response['P3P'] = 'CP="We do not have a P3P policy."'
