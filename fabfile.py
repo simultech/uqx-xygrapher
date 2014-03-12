@@ -33,7 +33,7 @@ def func_test():
 
 
 def func_gitadd(git_message):
-    local_ve("git add . && git commit -a -m \"" + git_message + "\"", "Git adding")
+    local_ve("git add . && git commit -a -m \"" + git_message + "\"", "Git adding", True)
 
 
 def func_gitpush():
@@ -42,13 +42,13 @@ def func_gitpush():
 
 #Helpers
 
-def local_ve(cmd, message):
+def local_ve(cmd, message, ignoreerror=False):
     if verbose:
         print "[Local] Command: " + message
     with hide('output', 'running', 'warnings'), settings(warn_only=True):
         envcmd = 'source '+env.local_base+'/env/bin/activate'
         result = local(envcmd + " && " + cmd, capture=True)
-        if result.failed and not confirm("+ Error: " + message + " failed. Continue anyway?"):
+        if not ignoreerror and result.failed and not confirm("+ Error: " + message + " failed. Continue anyway?"):
             abort("Aborting at user request.")
 
 def remote_vc(cmd, message):
