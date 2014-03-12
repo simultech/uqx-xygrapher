@@ -26,6 +26,7 @@ def deploy():
     with cd(env.remote_code_dir):
         #remote_vc("pip install -r ./setup/requirements.txt", "Loading new requirements")
         remote_vc("git pull", "Pulling from git",True)
+        remote_vc("service httpd graceful", "Restarting apache")
 
 #Internal
 
