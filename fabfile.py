@@ -51,7 +51,7 @@ def func_gitpush():
 def local_ve(cmd, message, ignoreerror=False):
     if verbose:
         print "[Local] Command: " + message
-    with settings(warn_only=True):
+    with hide('output', 'running', 'warnings'), settings(warn_only=True):
         envcmd = 'source '+env.local_base+'/env/bin/activate'
         result = local(envcmd + " && " + cmd, capture=True)
         if not ignoreerror and result.failed and not confirm("+ Error: " + message + " failed. Continue anyway?"):
