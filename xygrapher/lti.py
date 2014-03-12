@@ -77,17 +77,18 @@ class Lti():
             return True
         return False
 
-    def setvariables(request, contextvars, vars):
+    def setvariables(self, request, contextvars, thevars):
         """
         Sets custom variables from LTI or from settings
+        :param request: the HTTP request
         :param contextvars: the context dictionary
-        :param vars: key/values of each setting
+        :param thevars: key/values of each setting
         :return: an updated contextvars
         """
         postdata = {}
         if request.POST:
             postdata = dict(request.POST.dict())
-        for var in vars:
+        for var in thevars:
             if postdata.get("custom_"+var):
                 contextvars[var] = postdata.get("custom_"+var)
             else:
