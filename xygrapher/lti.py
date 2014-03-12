@@ -7,6 +7,7 @@ import urllib
 from django.http import Http404
 from oauthlib.oauth1.rfc5849 import signature
 from models import Consumer
+from grapher.middleware.http import Http403
 
 
 class Lti():
@@ -34,6 +35,7 @@ class Lti():
                     self.__httprequest.session["lti_user_id"] = postdata.get("user_id")
                     self.__httprequest.session["lti_role"] = postdata.get("roles")
                     print "NEW LTI SESSION"
+                    raise Http403
                 else:
                     print "GENERATING 404 - BAD OAUTH DATA"
                     raise Http404
