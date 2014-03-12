@@ -21,7 +21,7 @@ class Http403Middleware(object):
 
         try:
             # Handle import error but allow any type error from view
-            callback = getattr(import_module(settings.ROOT_URLCONF),'handler403')
+            callback = getattr(import_module(settings.ROOT_URLCONF),'handler403z')
             return callback(request,exception)
         except (ImportError,AttributeError):
             # Try to get a 403 template
