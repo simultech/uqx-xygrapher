@@ -24,7 +24,7 @@ def deploy():
             print "ERROR: NOT CLONED YET"
             #run("git clone user@vcshost:/path/to/repo/.git %s" % env.remote_code_dir)
     with cd(env.remote_code_dir):
-        remote_vc("git pull", "Pulling from git","Enter git password: ")
+        remote_vc("git pull", "Pulling from git",True)
 
 #Internal
 
@@ -57,12 +57,13 @@ def local_ve(cmd, message, ignoreerror=False):
         if not ignoreerror and result.failed and not confirm("+ Error: " + message + " failed. Continue anyway?"):
             abort("Aborting at user request.")
 
-def remote_vc(cmd, message, premessage=""):
+def remote_vc(cmd, message, showout=False):
+    hidden = ['output', 'running', 'warnings']
+    if showout == True:
+        print "HELLO"
     if verbose:
         print "["+env.host_string+"] Command: " + message
-    with hide('output', 'running', 'warnings'), settings(warn_only=True):
-        if premessage != "":
-            print premessage
+    with hide(hidden), settings(warn_only=True):
         envcmd = 'source '+env.remote_base+'/env/bin/activate'
         result = sudo(envcmd + " && " + cmd)
         if result.failed and not confirm("+ Error: " + message + " failed. Continue anyway?"):
