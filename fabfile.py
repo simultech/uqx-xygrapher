@@ -32,5 +32,5 @@ def local_ve(cmd,message):
         print "Command: "+message
     with hide('output','running','warnings'), settings(warn_only=True):
         result = local(env.activate+" && "+cmd, capture=True)
-        if result.failed and not confirm("+Error: "+message+" failed. Continue anyway?"):
+        if result.failed and not confirm("+ Error: "+message+" failed. Continue anyway?"):
             abort("Aborting at user request.")
