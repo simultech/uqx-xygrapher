@@ -4,7 +4,6 @@ Classes for verifying and capturing LTI information
 
 from collections import OrderedDict
 import urllib
-from django.http import Http404
 from oauthlib.oauth1.rfc5849 import signature
 from models import Consumer
 from grapher.middleware.http import Http403
@@ -34,11 +33,8 @@ class Lti():
                     self.__httprequest.session["lti_validsession"] = True
                     self.__httprequest.session["lti_user_id"] = postdata.get("user_id")
                     self.__httprequest.session["lti_role"] = postdata.get("roles")
-                    print "NEW LTI SESSION"
-                    raise Http403("NEW LTI SESSION")
                 else:
-                    print "GENERATING 404 - BAD OAUTH DATA"
-                    raise Http404
+                    raise Http403("BAD OAUTH DATA")
         elif self.is_valid() is not True and required:
             raise Http403("NOT AN LTI CALL AND LTI IS REQUIRED")
 
