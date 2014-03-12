@@ -30,7 +30,7 @@ def func_gitpush():
 def local_ve(cmd,message):
     if verbose:
         print "Command: "+message
-    with settings(warn_only=True):
+    with hide('output','running','warnings'), settings(warn_only=True):
         result = local(env.activate+" && "+cmd, capture=True)
         if result.failed and not confirm("Command "+message+" failed. Continue anyway?"):
             abort("Aborting at user request.")
