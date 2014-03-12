@@ -10,7 +10,7 @@ env.local_base = '../..'
 env.remote_base = '/var/www/django/'+env.remote_projectname
 env.remote_code_dir = env.remote_base+'/src/'+env.git_projectname
 
-env.hosts = ['uqmarkup']
+env.hosts = []
 
 def prepare():
     func_setup()
