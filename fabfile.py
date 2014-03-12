@@ -14,7 +14,8 @@ env.hosts = ['uqmarkup']
 
 def prepare():
     func_test()
-    func_gitadd("Auto Commit")
+    commit_message = prompt("[Local] Enter Git Commit Message: ","Hotfix")
+    func_gitadd(commit_message)
     func_gitpush()
 
 def deploy():
