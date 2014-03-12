@@ -29,7 +29,7 @@ def index(request):
     contextvars = {
         'student_id': student_id
     }
-    contextvars = lti.setVariables(request,contextvars,{
+    contextvars = lti.setvariables(request,contextvars,{
         'multiple_attempts': settings.XYGRAPHER_MULTIPLE_ATTEMPTS,
         'require_grade': settings.XYGRAPHER_REQUIRES_GRADE,
         'submit_button': settings.XYGRAPHER_SUBMIT_BUTTON,
