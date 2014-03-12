@@ -93,10 +93,9 @@ class Lti():
                 contextvars[var] = postdata.get("custom_"+var)
             else:
                 try:
-                    contextvars[var] = vars[var]
+                    contextvars[var] = thevars[var]
                 except Exception:
                     pass
-            print var
         return contextvars
 
     @staticmethod

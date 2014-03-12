@@ -23,7 +23,7 @@ def index(request):
     :param request:
     :return:
     """
-    lti = Lti(request, True)
+    lti = Lti(request, False)
     student_id = lti.get_userid()
     template = loader.get_template('index.html')
     contextvars = {
