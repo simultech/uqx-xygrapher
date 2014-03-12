@@ -51,7 +51,7 @@ XYGRAPHER_SHOWLINES = 'true'
 XYGRAPHER_MONGO_COLLECTION = 'xygrapher'
 XYGRAPHER_REQUIRES_GRADE = 'false'
 XYGRAPHER_MULTIPLE_ATTEMPTS = 'false'
-XYGRAPHER_SUBMIT_BUTTON = 'Submit Mark'
+XYGRAPHER_SUBMIT_BUTTON = 'Submit My Values'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
