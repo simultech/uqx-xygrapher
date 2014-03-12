@@ -44,7 +44,7 @@ def func_gitpush():
 
 def local_ve(cmd, message):
     if verbose:
-        print "Command: " + message
+        print "[Local] Command: " + message
     with hide('output', 'running', 'warnings'), settings(warn_only=True):
         envcmd = 'source '+env.local_base+'/env/bin/activate'
         result = local(envcmd + " && " + cmd, capture=True)
@@ -53,9 +53,9 @@ def local_ve(cmd, message):
 
 def remote_vc(cmd, message):
     if verbose:
-        print "Command: " + message
-    #with hide('output', 'running', 'warnings'), settings(warn_only=True):
-    envcmd = 'source '+env.remote_base+'/env/bin/activate'
-    result = sudo(envcmd + " && " + cmd)
-    if result.failed and not confirm("+ Error: " + message + " failed. Continue anyway?"):
-        abort("Aborting at user request.")
+        print "["+env.host_string+"] Command: " + message
+    with settings(warn_only=True):
+        envcmd = 'source '+env.remote_base+'/env/bin/activate'
+        result = sudo(envcmd + " && " + cmd)
+        if result.failed and not confirm("+ Error: " + message + " failed. Continue anyway?"):
+            abort("Aborting at user request.")
