@@ -21,8 +21,7 @@ class Http403Middleware(object):
 
         try:
             # Handle import error but allow any type error from view
-            callback = getattr(import_module(settings.ROOT_URLCONF),'handler403z')
-            return callback(request,exception)
+            callback = getattr(import_module(settings.ROOT_URLCONF),'handler403')
         except (ImportError,AttributeError):
             # Try to get a 403 template
             try:
@@ -40,13 +39,13 @@ class Http403Middleware(object):
                  <body>
                      <h1>{% trans "Access Denied (403)" %}</h1>
                      {% trans "We're sorry, but you are not authorized to view this page." %}
+                     Error: {{message}}
                  </body>
                  </html>""")
 
             # Now use context and render template
             c = RequestContext(request, {
-                  #'message': exception.message
-                  'message': 'blbk %s' % exception
+                  'message': '%s' % exception
              })
 
             return HttpResponseForbidden(t.render(c))
