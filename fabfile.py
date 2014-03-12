@@ -64,11 +64,11 @@ def remote_vc(cmd, message, showout=False):
         if showout == True:
             with show('output'):
                 envcmd = 'source '+env.remote_base+'/env/bin/activate'
-                result = sudo(envcmd + " && " + cmd, shell=False)
+                result = sudo(envcmd + " && " + cmd)
                 if result.failed and not confirm("+ Error: " + message + " failed. Continue anyway?"):
                     abort("Aborting at user request.")
         else:
             envcmd = 'source '+env.remote_base+'/env/bin/activate'
-            result = sudo(envcmd + " && " + cmd, shell=False)
+            result = sudo(envcmd + " && " + cmd)
             if result.failed and not confirm("+ Error: " + message + " failed. Continue anyway?"):
                 abort("Aborting at user request.")
