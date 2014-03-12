@@ -17,24 +17,20 @@ def prepare_deploy():
 #Internal
 
 def func_test():
-    if verbose:
-        print "Testing project"
-    local_ve("./manage.py test "+env.projectname)
+    local_ve("./manage.py test "+env.projectname, "Testing project")
 
 def func_gitadd(git_message):
-    if verbose:
-        print "Git adding"
-    local_ve("git add . && git commit -a -m \""+git_message+"\"")
+    local_ve("git add . && git commit -a -m \""+git_message+"\"", "Git adding")
 
 def func_gitpush():
-    if verbose:
-        print "Pushing to github"
-    local_ve("git push")
+    local_ve("git push", "Pushing to github")
 
 #Helpers
 
-def local_ve(cmd):
+def local_ve(cmd,message):
+    if verbose:
+        print "Command: "+message
     with settings(warn_only=True):
         result = local(env.activate+" && "+cmd, capture=True)
-        if result.failed and not confirm("Command failed. Continue anyway?"):
+        if result.failed and not confirm("Command "+message+" failed. Continue anyway?"):
             abort("Aborting at user request.")
