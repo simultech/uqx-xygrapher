@@ -35,7 +35,7 @@ class Lti():
                     self.__httprequest.session["lti_user_id"] = postdata.get("user_id")
                     self.__httprequest.session["lti_role"] = postdata.get("roles")
                     print "NEW LTI SESSION"
-                    raise Http403
+                    raise Http403("NEW LTI SESSION")
                 else:
                     print "GENERATING 404 - BAD OAUTH DATA"
                     raise Http404
