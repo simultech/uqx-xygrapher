@@ -24,6 +24,7 @@ def deploy():
             print "ERROR: NOT CLONED YET"
             #run("git clone user@vcshost:/path/to/repo/.git %s" % env.remote_code_dir)
     with cd(env.remote_code_dir):
+        #remote_vc("pip install -r ./setup/requirements.txt", "Loading new requirements")
         remote_vc("git pull", "Pulling from git",True)
 
 #Internal
@@ -41,7 +42,6 @@ def func_gitadd():
         git_message = "Anonymous Hotfix"
     local_ve("git add . && git commit -a -m \"" + git_message + "\"", "Git adding", True)
 
-
 def func_gitpush():
     local_ve("git push", "Pushing to github")
 
@@ -58,13 +58,17 @@ def local_ve(cmd, message, ignoreerror=False):
             abort("Aborting at user request.")
 
 def remote_vc(cmd, message, showout=False):
-    hidden = ['output', 'running', 'warnings']
-    if showout == True:
-        print "HELLO"
     if verbose:
         print "["+env.host_string+"] Command: " + message
-    with hide(hidden), settings(warn_only=True):
-        envcmd = 'source '+env.remote_base+'/env/bin/activate'
-        result = sudo(envcmd + " && " + cmd)
-        if result.failed and not confirm("+ Error: " + message + " failed. Continue anyway?"):
-            abort("Aborting at user request.")
+    with hide('running', 'warnings', 'output'), settings(warn_only=True):
+        if showout == True:
+            with show('output'):
+                envcmd = 'source '+env.remote_base+'/env/bin/activate'
+                result = sudo(envcmd + " && " + cmd)
+                if result.failed and not confirm("+ Error: " + message + " failed. Continue anyway?"):
+                    abort("Aborting at user request.")
+        else:
+            envcmd = 'source '+env.remote_base+'/env/bin/activate'
+            result = sudo(envcmd + " && " + cmd)
+            if result.failed and not confirm("+ Error: " + message + " failed. Continue anyway?"):
+                abort("Aborting at user request.")
