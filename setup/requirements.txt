@@ -1,6 +1,10 @@
 Django==1.6.2
+Fabric==1.8.2
 django-p3p==1.0.1
+ecdsa==0.11
 mongoengine==0.8.7
 oauthlib==0.6.1
+paramiko==1.12.2
+pycrypto==2.6.1
 pymongo==2.6.3
 wsgiref==0.1.2
