@@ -54,7 +54,28 @@ app.directive("plotgraph",function($window) {
 				.attr("height", height + margin.top + margin.bottom)
 			.append("g")
 				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-	
+		d3.select("svg").append("svg:defs").append("marker")
+            .attr("id", "EndMarker")
+            .attr("viewBox", "0 0 30 30")
+            .attr("refX", 0)
+            .attr("refY", 5)
+            .attr("markerWidth", "30")
+            .attr("markerHeight", "30")
+            .attr("orient", "auto")
+            .append("svg:path")
+            .style("fill", function(d) { return d3.rgb(userColor); })
+	        .attr("d", "M0,0 L10,5 L0,10");
+	    d3.select("defs").append("marker")
+            .attr("id", "StartMarker")
+            .attr("viewBox", "0 0 30 30")
+            .attr("refX", 0)
+            .attr("refY", 5)
+            .attr("markerWidth", "30")
+            .attr("markerHeight", "30")
+            .attr("orient", "auto")
+            .append("svg:path")
+            .style("fill", function(d) { return d3.rgb(userColor); })
+	        .attr("d", "M10,0 L0,5 L10,10");
 		// CAN BE DONE EARLIER
 		// setup x 
 		var xValue = function(d) { return d.x;}, // data -> value
@@ -118,21 +139,51 @@ app.directive("plotgraph",function($window) {
 			.attr("cy", yMap)
 			.style("fill", function(d) { return cValue(d);});
 
-        function addLines(d) {
+        function addLines(d) { 
             if(scope.showlines == 'true') {
+            	var maxWidth = width + margin.left + margin.right - 80;
+                var maxHeight = height + margin.top + margin.bottom;
+                var showXArrow = false;
+                var showYArrow = false;
+                if(xMap(d) > maxWidth) {
+                	showXArrow = true;
+                }
+                if(yMap(d) < -20) {
+                	showYArrow = true;
+                }
+                if(showXArrow && showYArrow) {
+	                graph.append("g").append('circle')
+	                .attr("class", "dot")
+					.attr("r", 10)
+					.attr("cx", maxWidth+10)
+					.attr("cy", -20)
+					.style("fill", function(d) { return d3.rgb(userColor); })
+                }
                 //x axis line
                 graph.append("g").append('svg:line')
                     .attr("x1", -100)
                     .attr("y1", yMap(d))
-                    .attr("x2", width + margin.left + margin.right)
+                    .attr("x2", maxWidth)
                     .attr("y2", yMap(d))
+                    .attr("marker-end", function (d) {
+                    	if(showXArrow) {
+	                        return "url(#EndMarker)";
+	                    }
+	                    return "";
+                    })
                     .style("stroke", d3.rgb(userColor));
                 //y axis line
                 graph.append("g").append('svg:line')
                     .attr("x1", xMap(d))
-                    .attr("y1", -100)
+                    .attr("y1", -20)
                     .attr("x2", xMap(d))
-                    .attr("y2", height + margin.top + margin.bottom)
+                    .attr("y2", maxHeight)
+                    .attr("marker-start", function (d) {
+                    	if(showYArrow) {
+	                        return "url(#StartMarker)";
+	                    }
+	                    return "";
+                    })
                     .style("stroke", d3.rgb(userColor));
             }
         }
